@@ -3,11 +3,10 @@ package handler
 import (
 	"net/http"
 	"path"
-	"webserver/helper"
 )
 
 func CatchAllHandler(w http.ResponseWriter, r *http.Request) {
-	helper.LogRequest(r)
+	logRequest(r)
 
 	if r.URL.Path == "/" {
 		HomeHandler(w, r)

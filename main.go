@@ -5,7 +5,6 @@ import (
 	"log"
 	"net/http"
 	"webserver/handler"
-	"webserver/helper"
 )
 
 const port = 8080
@@ -19,5 +18,5 @@ func main() {
 	log.Printf("Starting server on PORT %d", port)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
-	helper.Must(err)
+	must(err)
 }
