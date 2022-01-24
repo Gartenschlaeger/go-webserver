@@ -2,38 +2,22 @@ package main
 
 import (
 	"fmt"
-	"html/template"
+	"log"
 	"net/http"
-	"path"
 
-	"webserver/models"
+	"webserver/handler"
+	"webserver/helper"
 )
 
-func staticContentHandler(response http.ResponseWriter, request *http.Request) {
-	path := path.Join("wwwroot", request.URL.Path[1:])
-	fmt.Printf("staticContentHandler path %v\n", path)
-
-	http.ServeFile(response, request, path)
-}
-
-func templateHandler(response http.ResponseWriter, request *http.Request) {
-	model := models.IndexModel{
-		Title: "Test"}
-
-	template, err := template.ParseFiles("wwwroot/index.html")
-	must(err)
-
-	template.Execute(response, model)
-}
-
-func pingHandler(response http.ResponseWriter, request *http.Request) {
-	fmt.Fprintf(response, "PONG")
-}
+const port = 8080
 
 func main() {
-	http.HandleFunc("/", staticContentHandler)
-	http.HandleFunc("/ping", pingHandler)
-	http.HandleFunc("/template", templateHandler)
+	http.HandleFunc("/", handler.StaticHandler)
+	http.HandleFunc("/home", handler.HomeHandler)
+	http.HandleFunc("/ping", handler.PingHandler)
 
-	http.ListenAndServe(":8080", nil)
+	log.Printf("Starting server on PORT %d", port)
+
+	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
+	helper.Must(err)
 }

@@ -1,5 +1,6 @@
 package models
 
 type IndexModel struct {
-	Title string
+	Title   string
+	Message string
 }
