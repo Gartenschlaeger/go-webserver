@@ -6,7 +6,7 @@ import (
 	"webserver/helper"
 )
 
-func StaticHandler(w http.ResponseWriter, r *http.Request) {
+func CatchAllHandler(w http.ResponseWriter, r *http.Request) {
 	helper.LogRequest(r)
 
 	if r.URL.Path == "/" {

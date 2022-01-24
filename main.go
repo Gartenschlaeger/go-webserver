@@ -11,10 +11,10 @@ import (
 const port = 8080
 
 func main() {
-	http.HandleFunc("/", handler.StaticHandler)
 	http.HandleFunc("/home", handler.HomeHandler)
 	http.HandleFunc("/about", handler.AboutHandler)
-	http.HandleFunc("/ping", handler.PingHandler)
+	http.HandleFunc("/health", handler.HealthHandler)
+	http.HandleFunc("/", handler.CatchAllHandler)
 
 	log.Printf("Starting server on PORT %d", port)
 

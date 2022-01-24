@@ -6,8 +6,8 @@ import (
 	"webserver/helper"
 )
 
-func PingHandler(w http.ResponseWriter, r *http.Request) {
+func HealthHandler(w http.ResponseWriter, r *http.Request) {
 	helper.LogRequest(r)
 
-	fmt.Fprint(w, "PONG")
+	fmt.Fprint(w, "OK")
 }
