@@ -2,7 +2,8 @@ package handler
 
 import (
 	"net/http"
-	"webserver/models"
+
+	"github.com/KaiGartenschlaeger/go-webserver/models"
 )
 
 func HomeHandler(w http.ResponseWriter, r *http.Request) {

@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"webserver/handler"
+
+	"github.com/KaiGartenschlaeger/go-webserver/handler"
 )
 
 const port = 8080
