@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"html/template"
 	"log"
 	"net/http"
 
@@ -16,8 +15,5 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		Title:   "Test",
 		Message: "Welcome to the home page"}
 
-	template, err := template.ParseFiles("templates/home.html")
-	helper.Must(err)
-
-	template.Execute(w, model)
+	helper.HandleTemplateRequest("home", model, w, r)
 }
