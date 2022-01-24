@@ -14,6 +14,10 @@ func Must(err error) {
 	}
 }
 
+func LogRequest(r *http.Request) {
+	log.Printf("AboutHandler %v %v %v\n", r.Proto, r.Method, r.URL.Path)
+}
+
 func HandleTemplateRequest(templateName string, model interface{}, w http.ResponseWriter, r *http.Request) {
 	log.Printf("handleTemplateRequest %v %v %v\n", r.Proto, r.Method, r.URL.Path)
 

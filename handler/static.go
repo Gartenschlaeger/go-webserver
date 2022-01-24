@@ -1,13 +1,13 @@
 package handler
 
 import (
-	"log"
 	"net/http"
 	"path"
+	"webserver/helper"
 )
 
 func StaticHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("StaticHandler %v %v %v\n", r.Proto, r.Method, r.URL.Path)
+	helper.LogRequest(r)
 
 	if r.URL.Path == "/" {
 		HomeHandler(w, r)

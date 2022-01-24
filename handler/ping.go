@@ -2,12 +2,12 @@ package handler
 
 import (
 	"fmt"
-	"log"
 	"net/http"
+	"webserver/helper"
 )
 
 func PingHandler(w http.ResponseWriter, r *http.Request) {
-	log.Printf("PingHandler %v %v %v\n", r.Proto, r.Method, r.URL.Path)
+	helper.LogRequest(r)
 
 	fmt.Fprint(w, "PONG")
 }
