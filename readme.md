@@ -7,7 +7,7 @@ Example project for a web server written in go.
 ## Run application
 
 ```sh
-go run .
+go run cmd/web/*.go
 ```
 
 ## Test requests
