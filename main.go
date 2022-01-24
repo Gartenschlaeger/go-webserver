@@ -5,6 +5,8 @@ import (
 	"html/template"
 	"net/http"
 	"path"
+
+	"webserver/models"
 )
 
 func staticContentHandler(response http.ResponseWriter, request *http.Request) {
@@ -15,7 +17,7 @@ func staticContentHandler(response http.ResponseWriter, request *http.Request) {
 }
 
 func templateHandler(response http.ResponseWriter, request *http.Request) {
-	model := IndexModel{
+	model := models.IndexModel{
 		Title: "Test"}
 
 	template, err := template.ParseFiles("wwwroot/index.html")
