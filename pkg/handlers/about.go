@@ -10,5 +10,5 @@ import (
 func AboutHandler(w http.ResponseWriter, r *http.Request) {
 	logging.LogRequest(r)
 
-	render.RenderTemplate("about", nil, w, r)
+	render.RenderTemplate(w, r, "about", nil)
 }

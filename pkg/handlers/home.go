@@ -15,5 +15,5 @@ func HomeHandler(w http.ResponseWriter, r *http.Request) {
 		Title:   "Test",
 		Message: "Welcome to the home page"}
 
-	render.RenderTemplate("home", model, w, r)
+	render.RenderTemplate(w, r, "home", model)
 }
