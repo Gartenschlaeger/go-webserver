@@ -7,17 +7,22 @@ import (
 	"net/http"
 	"path/filepath"
 	"text/template"
+
+	"github.com/KaiGartenschlaeger/go-webserver/pkg/config"
 )
 
 var functions = template.FuncMap{}
 
-func RenderTemplate(w http.ResponseWriter, r *http.Request, templateName string, model interface{}) {
-	templateCache, errTemplateCache := createTemplateCache()
-	if errTemplateCache != nil {
-		log.Fatalln(errTemplateCache)
-	}
+var app *config.AppConfig
 
-	template, ok := templateCache[fmt.Sprintf("%v.html", templateName)]
+// NewTemplates sets the config for the template package
+func NewTemplates(a *config.AppConfig) {
+	app = a
+}
+
+func RenderTemplate(w http.ResponseWriter, r *http.Request, templateName string, model interface{}) {
+	templateFilename := fmt.Sprintf("%v.html", templateName)
+	template, ok := app.TemplateCache[templateFilename]
 	if !ok {
 		log.Fatal("template not ok")
 	}
@@ -27,11 +32,11 @@ func RenderTemplate(w http.ResponseWriter, r *http.Request, templateName string,
 
 	_, err := buf.WriteTo(w)
 	if err != nil {
-		log.Println("Failed to write template to buffer", errTemplateCache)
+		log.Println("Failed to write template to buffer", err)
 	}
 }
 
-func createTemplateCache() (map[string]*template.Template, error) {
+func CreateTemplateCache() (map[string]*template.Template, error) {
 	cache := map[string]*template.Template{}
 
 	pages, err := filepath.Glob("./templates/*.html")

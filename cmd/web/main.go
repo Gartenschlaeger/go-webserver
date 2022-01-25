@@ -5,7 +5,9 @@ import (
 	"log"
 	"net/http"
 
+	"github.com/KaiGartenschlaeger/go-webserver/pkg/config"
 	"github.com/KaiGartenschlaeger/go-webserver/pkg/handlers"
+	"github.com/KaiGartenschlaeger/go-webserver/pkg/render"
 )
 
 const port = 8080
@@ -18,6 +20,16 @@ func must(err error) {
 }
 
 func main() {
+	tc, err := render.CreateTemplateCache()
+	if err != nil {
+		log.Fatalln("Failed to create template cache", err)
+	}
+
+	app := config.AppConfig{}
+	app.TemplateCache = tc
+
+	render.NewTemplates(&app)
+
 	http.HandleFunc("/home", handlers.HomeHandler)
 	http.HandleFunc("/about", handlers.AboutHandler)
 	http.HandleFunc("/health", handlers.HealthHandler)
@@ -25,6 +37,5 @@ func main() {
 
 	log.Printf("Starting server on PORT %d", port)
 
-	err := http.ListenAndServe(fmt.Sprintf(":%d", port), nil)
-	must(err)
+	log.Fatalln(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
 }
